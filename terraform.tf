@@ -2,7 +2,6 @@
 # or using -var="digitalocean_token=..." CLI option
 variable "digitalocean_token" {}
 
-# Configure the DigitalOcean Provider
 provider "digitalocean" {
 	token = "${var.digitalocean_token}"
 }
@@ -48,4 +47,9 @@ resource "digitalocean_droplet" "minecraft" {
     	script = "setup.sh"
   	}
 
+}
+
+resource "digitalocean_floating_ip" "minecraft" {
+	droplet_id = "${digitalocean_droplet.minecraft.id}"
+	region     = "${digitalocean_droplet.minecraft.region}"
 }
