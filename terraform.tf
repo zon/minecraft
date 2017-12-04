@@ -26,6 +26,19 @@ resource "digitalocean_droplet" "minecraft" {
 		user = "root"
 	}
 
+	provisioner "local-exec" {
+		command = "bash build.sh"
+	}
+
+	provisioner "remote-exec" {
+		inline = ["mkdir /opt/minecraft"]
+	}
+
+	provisioner "file" {
+		source = "spigot.jar"
+		destination = "/opt/minecraft/spigot.jar"
+	}
+
 	provisioner "file" {
 		source      = "minecraft.service"
 		destination = "/etc/systemd/system/minecraft.service"
