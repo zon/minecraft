@@ -1,5 +1,4 @@
 # TODO
 
-* Creative
-* Volume
 * Backup
+* Seed

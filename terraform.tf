@@ -39,6 +39,11 @@ resource "digitalocean_droplet" "minecraft" {
 	}
 
 	provisioner "file" {
+		source = "server.properties"
+		destination = "/opt/minecraft/server.properties"
+	}
+
+	provisioner "file" {
 		source      = "minecraft.service"
 		destination = "/etc/systemd/system/minecraft.service"
 	}
