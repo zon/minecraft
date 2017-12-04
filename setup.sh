@@ -1,5 +1,9 @@
 #!/bin/bash
 
+ufw allow ssh/tcp
+ufw allow 25565/tcp
+ufw --force enable
+
 apt-get update
 apt-get install -y default-jdk
 
