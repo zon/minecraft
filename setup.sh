@@ -5,7 +5,7 @@ ufw allow 25565/tcp
 ufw --force enable
 
 apt-get update
-apt-get install -y default-jdk
+apt-get install -y default-jdk awscli
 
 echo "eula=true" > /opt/minecraft/eula.txt
 
@@ -14,3 +14,5 @@ chown -R minecraft:minecraft /opt/minecraft
 
 systemctl enable minecraft
 systemctl start minecraft
+# systemctl enable minecraft-backup
+# systemctl start minecraft-backup

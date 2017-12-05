@@ -30,7 +30,20 @@ resource "digitalocean_droplet" "minecraft" {
 	}
 
 	provisioner "remote-exec" {
-		inline = ["mkdir /opt/minecraft"]
+		inline = [
+			"mkdir /opt/minecraft",
+			"mkdir /opt/minecraft/.aws"
+		]
+	}
+
+	provisioner "file" {
+		content = "[default]\nregion = ${aws_s3_bucket.backup.region}"
+		destination = "/opt/minecraft/.aws/config"
+	}
+
+	provisioner "file" {
+		content = "[default]\naws_access_key_id = ${aws_iam_access_key.backup.id}\naws_secret_access_key = ${aws_iam_access_key.backup.secret}"
+		destination = "/opt/minecraft/.aws/credentials"
 	}
 
 	provisioner "file" {
@@ -44,8 +57,23 @@ resource "digitalocean_droplet" "minecraft" {
 	}
 
 	provisioner "file" {
-		source      = "minecraft.service"
+		source = "backup.sh"
+		destination = "/opt/minecraft/backup.sh"
+	}
+
+	provisioner "file" {
+		source = "minecraft.service"
 		destination = "/etc/systemd/system/minecraft.service"
+	}
+
+	provisioner "file" {
+		source = "minecraft-backup.service"
+		destination = "/etc/systemd/system/minecraft-backup.service"
+	}
+
+	provisioner "file" {
+		source = "minecraft-backup.timer"
+		destination = "/etc/systemd/system/minecraft-backup.timer"
 	}
 
 	provisioner "remote-exec" {
