@@ -14,5 +14,5 @@ chown -R minecraft:minecraft /opt/minecraft
 
 systemctl enable minecraft
 systemctl start minecraft
-# systemctl enable minecraft-backup
-# systemctl start minecraft-backup
+systemctl enable minecraft-backup
+systemctl start minecraft-backup
