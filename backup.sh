@@ -3,7 +3,7 @@
 WORLD="world"
 DATE=`date +%Y-%m-%d`
 ARCHIVE="$WORLD-$DATE.tar.gz"
-BUCKET="minecraft-worlds"
+BUCKET="minecraft-snaps"
 
 systemctl stop minecraft
 tar -czf $ARCHIVE $WORLD ${WORLD}_nether ${WORLD}_the_end

@@ -1,9 +1,0 @@
-[Unit]
-Description=Minecraft Backup
-
-[Service]
-Type=oneshot
-User=minecraft
-Group=minecraft
-WorkingDirectory=/opt/minecraft
-ExecStart=/bin/bash /opt/minecraft/backup.sh

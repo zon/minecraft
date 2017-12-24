@@ -1,9 +1,17 @@
-provider "aws" {
-  region = "us-east-1"
+locals {
+	bucket_name = "minecraft-backups"
+}
+
+resource "random_id" "backup" {
+	keepers = {
+		name = "${local.bucket_name}"
+	}
+
+	byte_length = 3
 }
 
 resource "aws_s3_bucket" "backup" {
-	bucket = "minecraft-worlds"
+	bucket = "${local.bucket_name}-${random_id.backup.hex}"
 	acl = "private"
 }
 
