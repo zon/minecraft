@@ -77,3 +77,23 @@ resource "aws_instance" "server" {
 		Name = "minecraft"
 	}
 }
+
+data "aws_route53_zone" "main" {
+	name = "${var.domain}."
+}
+
+resource "aws_route53_record" "a" {
+	zone_id = "${data.aws_route53_zone.main.zone_id}"
+	name = "${data.aws_route53_zone.main.name}"
+	type = "A"
+	ttl = "30"
+	records = ["${aws_instance.server.public_ip}"]
+}
+
+resource "aws_route53_record" "minecraft_a" {
+	zone_id = "${data.aws_route53_zone.main.zone_id}"
+	name = "minecraft.${data.aws_route53_zone.main.name}"
+	type = "A"
+	ttl = "30"
+	records = ["${aws_instance.server.public_ip}"]
+}

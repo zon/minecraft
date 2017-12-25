@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 WORLD="world"
 DATE=`date +%Y-%m-%d`
 ARCHIVE="$WORLD-$DATE.tar.gz"

@@ -1,4 +1,7 @@
-variable "digitalocean_token" {}
+variable "domain" {
+	description = "Root host domain"
+	default = "zon.fail"
+}
 
 variable "aws_profile" {
 	description = "Name of your profile inside ~/.aws/credentials"
